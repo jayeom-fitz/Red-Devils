@@ -7,6 +7,9 @@ import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from 'serviceWorker';
 import App from 'App';
 
+// style + assets
+import 'assets/scss/style.scss';
+
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 ReactDOM.render(

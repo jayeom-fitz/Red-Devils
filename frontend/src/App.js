@@ -1,7 +1,14 @@
+// routing
+import Routes from 'routes';
+
 // ==============================|| APP ||============================== //
 
 const App = () => {
-  return <>app</>;
+  return (
+    <>
+      <Routes />
+    </>
+  );
 };
 
 export default App;
