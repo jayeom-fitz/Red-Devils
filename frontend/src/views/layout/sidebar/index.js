@@ -8,11 +8,12 @@ import { Box, Drawer, useMediaQuery } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 // project imports
+import MenuList from './menu-list';
 import { drawerWidth } from 'store/constant';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
-const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
+const Sidebar = ({ drawerOpen, drawerToggle, window, items }) => {
   const theme = useTheme();
   const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -48,9 +49,8 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
             paddingRight: '16px',
           }}
         >
-          {/* <MenuList />
-                <MenuCard /> */}
-          asdasd
+          <MenuList menuItems={items} />
+          {/* <MenuCard /> */}
         </PerfectScrollbar>
       </Drawer>
     </Box>

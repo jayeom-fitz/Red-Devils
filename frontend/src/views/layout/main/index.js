@@ -10,6 +10,8 @@ import { AppBar, Box, CssBaseline, Toolbar, useMediaQuery } from '@mui/material'
 import Header from '../header';
 import Sidebar from '../sidebar';
 
+import sidebarMenuItems from './sidebar-menu-items';
+
 import { drawerWidth } from 'store/constant';
 import { SET_MENU } from 'store/actions';
 
@@ -54,7 +56,7 @@ const MainLayout = () => {
       </AppBar>
 
       {/* drawer */}
-      <Sidebar drawerOpen={leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
+      <Sidebar drawerOpen={leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} items={sidebarMenuItems} />
     </Box>
   );
 };
