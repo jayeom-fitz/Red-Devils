@@ -7,7 +7,7 @@ import NavGroup from './nav/NavGroup';
 // ==============================|| SIDEBAR MENU LIST ||============================== //
 
 const MenuList = ({ menuItems }) => {
-  const navItems = menuItems.map((item) => {
+  const navItems = menuItems.items.map((item) => {
     switch (item.type) {
       case 'group':
         return <NavGroup key={item.id} item={item} />;
