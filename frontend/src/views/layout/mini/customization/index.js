@@ -198,7 +198,6 @@ const Customization = () => {
               </SubCard>
             </Grid>
           </Grid>
-          aaaaaa {console.log('aaa')}
         </PerfectScrollbar>
       </Drawer>
     </>

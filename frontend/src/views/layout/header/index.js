@@ -6,6 +6,7 @@ import { Avatar, Box, ButtonBase } from '@mui/material';
 
 // project imports
 import LogoSection from './logo';
+import LoginSection from './login';
 
 // assets
 import { IconMenu2 } from '@tabler/icons';
@@ -53,6 +54,12 @@ const Header = ({ handleLeftDrawerToggle }) => {
           </Avatar>
         </ButtonBase>
       </Box>
+
+      <Box sx={{ flexGrow: 1 }} />
+      <Box sx={{ flexGrow: 1 }} />
+
+      {/* profile or login */}
+      <LoginSection />
     </>
   );
 };
