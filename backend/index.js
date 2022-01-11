@@ -7,6 +7,11 @@ server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(cors());
 
+// ============================|| ROUTES ||============================ //
+const userRouter = require("./routes/user.route.js");
+
+server.use("/user", userRouter);
+
 server.listen(5000, () => {
   console.log("Server running on port 5000");
 });
