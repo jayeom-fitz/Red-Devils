@@ -7,6 +7,7 @@ import { Avatar, Box, ButtonBase } from '@mui/material';
 // project imports
 import LogoSection from './logo';
 import LoginSection from './login';
+import ProfileSection from './profile';
 
 // assets
 import { IconMenu2 } from '@tabler/icons';
@@ -15,7 +16,7 @@ import { IconMenu2 } from '@tabler/icons';
 
 const Header = ({ handleLeftDrawerToggle }) => {
   const theme = useTheme();
-  // const uid = sessionStorage.getItem('uid');
+  const user_srl = sessionStorage.getItem('user_srl');
 
   return (
     <>
@@ -59,7 +60,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
       <Box sx={{ flexGrow: 1 }} />
 
       {/* profile or login */}
-      <LoginSection />
+      {user_srl ? <ProfileSection /> : <LoginSection />}
     </>
   );
 };
