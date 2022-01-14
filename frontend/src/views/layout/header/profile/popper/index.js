@@ -35,7 +35,7 @@ import MainCard from 'components/cards/MainCard';
 import Transitions from 'components/extended/Transitions';
 
 // assets
-import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
+import { IconLogout, IconSettings, IconUser } from '@tabler/icons';
 
 // ==============================|| PROFILE POPPER ||============================== //
 
@@ -43,6 +43,10 @@ const ProfilePopper = ({ open, anchorRef, handleClose }) => {
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
   const navigate = useNavigate();
+
+  const user_srl = sessionStorage.getItem('user_srl');
+  const user_name = sessionStorage.getItem('user_name');
+  const user_level = sessionStorage.getItem('user_level');
 
   const [value, setValue] = useState('');
   const [sdm, setSdm] = useState(true);
@@ -56,6 +60,12 @@ const ProfilePopper = ({ open, anchorRef, handleClose }) => {
     if (route && route !== '') {
       navigate(route);
     }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    alert('you have been logged out.');
+    navigate(0);
   };
 
   return (
@@ -85,31 +95,14 @@ const ProfilePopper = ({ open, anchorRef, handleClose }) => {
                 <Box sx={{ p: 2 }}>
                   <Stack>
                     <Stack direction="row" spacing={0.5} alignItems="center">
-                      <Typography variant="h4">Good Morning,</Typography>
                       <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                        Johne Doe
+                        Hello,
                       </Typography>
+                      <Typography variant="h4">{user_name}</Typography>
                     </Stack>
-                    <Typography variant="subtitle2">Project Admin</Typography>
                   </Stack>
-                  <OutlinedInput
-                    sx={{ width: '100%', pr: 1, pl: 2, my: 2 }}
-                    id="input-search-profile"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder="Search profile options"
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
-                      </InputAdornment>
-                    }
-                    aria-describedby="search-helper-text"
-                    inputProps={{
-                      'aria-label': 'weight',
-                    }}
-                  />
-                  <Divider />
                 </Box>
+
                 <PerfectScrollbar
                   style={{
                     height: '100%',
@@ -118,40 +111,8 @@ const ProfilePopper = ({ open, anchorRef, handleClose }) => {
                   }}
                 >
                   <Box sx={{ p: 2 }}>
-                    {/* <UpgradePlanCard /> */}
                     <Divider />
-                    <Card
-                      sx={{
-                        bgcolor: theme.palette.primary.light,
-                        my: 2,
-                      }}
-                    >
-                      <CardContent>
-                        <Grid container spacing={3} direction="column">
-                          <Grid item>
-                            <Grid item container alignItems="center" justifyContent="space-between">
-                              <Grid item>
-                                <Typography variant="subtitle1">Start DND Mode</Typography>
-                              </Grid>
-                              <Grid item>
-                                <Switch color="primary" checked={sdm} onChange={(e) => setSdm(e.target.checked)} name="sdm" size="small" />
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                          <Grid item>
-                            <Grid item container alignItems="center" justifyContent="space-between">
-                              <Grid item>
-                                <Typography variant="subtitle1">Allow Notifications</Typography>
-                              </Grid>
-                              <Grid item>
-                                <Switch checked={notification} onChange={(e) => setNotification(e.target.checked)} name="sdm" size="small" />
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </CardContent>
-                    </Card>
-                    <Divider />
+
                     <List
                       component="nav"
                       sx={{
@@ -206,10 +167,8 @@ const ProfilePopper = ({ open, anchorRef, handleClose }) => {
                           }
                         />
                       </ListItemButton>
-                      <ListItemButton
-                        sx={{ borderRadius: `${customization.borderRadius}px` }}
-                        selected={selectedIndex === 4} /* onClick={handleLogout} */
-                      >
+
+                      <ListItemButton sx={{ borderRadius: `${customization.borderRadius}px` }} selected={selectedIndex === 4} onClick={handleLogout}>
                         <ListItemIcon>
                           <IconLogout stroke={1.5} size="1.3rem" />
                         </ListItemIcon>

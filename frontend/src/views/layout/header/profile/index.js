@@ -1,28 +1,20 @@
 import { useState, useRef, useEffect } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Chip } from '@mui/material';
 
 // project imports
-import ProfilePopper from './ProfilePopper';
+import ProfilePopper from './popper';
 
 // assets
-import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
+import { IconSettings } from '@tabler/icons';
 
 // ==============================|| PROFILE ||============================== //
 
 const ProfileSection = () => {
   const theme = useTheme();
-  const customization = useSelector((state) => state.customization);
-  const navigate = useNavigate();
 
-  const user_srl = sessionStorage.getItem('user_srl');
-  const user_name = sessionStorage.getItem('user_name');
-  const user_level = sessionStorage.getItem('user_level');
   const user_image_url = sessionStorage.getItem('user_image_url');
 
   const [open, setOpen] = useState(false);
