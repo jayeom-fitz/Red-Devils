@@ -5,34 +5,10 @@ import { useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  Chip,
-  ClickAwayListener,
-  Divider,
-  Grid,
-  InputAdornment,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  OutlinedInput,
-  Paper,
-  Popper,
-  Stack,
-  Switch,
-  Typography,
-} from '@mui/material';
-
-// third-party
-import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Avatar, Chip } from '@mui/material';
 
 // project imports
-import MainCard from 'components/cards/MainCard';
-import Transitions from 'components/extended/Transitions';
+import ProfilePopper from './ProfilePopper';
 
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
@@ -48,6 +24,34 @@ const ProfileSection = () => {
   const user_name = sessionStorage.getItem('user_name');
   const user_level = sessionStorage.getItem('user_level');
   const user_image_url = sessionStorage.getItem('user_image_url');
+
+  const [open, setOpen] = useState(false);
+
+  /**
+   * anchorRef is used on different componets and specifying one type leads to other components throwing an error
+   * */
+  const anchorRef = useRef(null);
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const prevOpen = useRef(open);
+
+  useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
 
   return (
     <>
@@ -79,20 +83,21 @@ const ProfileSection = () => {
               margin: '8px 0 8px 8px !important',
               cursor: 'pointer',
             }}
-            // ref={anchorRef}
-            // aria-controls={open ? 'menu-list-grow' : undefined}
+            ref={anchorRef}
+            aria-controls={open ? 'menu-list-grow' : undefined}
             aria-haspopup="true"
             color="inherit"
           />
         }
         label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />}
         variant="outlined"
-        // ref={anchorRef}
-        // aria-controls={open ? 'menu-list-grow' : undefined}
+        ref={anchorRef}
+        aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
-        // onClick={handleToggle}
+        onClick={handleToggle}
         color="primary"
       />
+      <ProfilePopper open={open} anchorRef={anchorRef} handleClose={handleClose} />
     </>
   );
 };
