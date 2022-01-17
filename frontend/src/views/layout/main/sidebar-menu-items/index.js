@@ -1,9 +1,10 @@
+import main from './main';
 import utilities from './utilities';
 
 // ==============================|| SIDEBAR MENU ITEMS ||============================== //
 
 const sidebarMenuItems = {
-  items: [utilities],
+  items: [main, utilities],
 };
 
 export default sidebarMenuItems;
