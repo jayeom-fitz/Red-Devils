@@ -4,6 +4,9 @@ import { lazy } from 'react';
 import MainLayout from 'views/layout/main';
 import Loadable from 'components/loadable';
 
+// main menu routing
+const Contents = Loadable(lazy(() => import('views/pages/main/Contents')));
+
 // utilities routing
 const Color = Loadable(lazy(() => import('views/pages/main/utilities/Color')));
 
@@ -13,6 +16,22 @@ const MainRoutes = {
   path: '/',
   element: <MainLayout />,
   children: [
+    {
+      path: '/rank',
+      element: <Contents />,
+    },
+    {
+      path: '/hot',
+      element: <Contents />,
+    },
+    {
+      path: '/contents',
+      element: <Contents />,
+    },
+    {
+      path: '/videos',
+      element: <Contents />,
+    },
     {
       path: '/color',
       element: <Color />,
