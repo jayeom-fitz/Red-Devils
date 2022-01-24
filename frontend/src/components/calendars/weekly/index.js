@@ -5,6 +5,7 @@ import { IconButton, Button, Box, Card, Grid, Typography } from '@mui/material';
 
 // project import
 import Head from './Head';
+import Body from './Body';
 
 // third party
 import moment from 'moment';
@@ -30,6 +31,7 @@ const WeeklyCalendar = ({ setDate }) => {
         }}
       >
         <Head getMoment={getMoment} setMoment={setMoment} />
+        <Body setDate={setDate} getMoment={getMoment} />
       </Box>
     </>
   );
