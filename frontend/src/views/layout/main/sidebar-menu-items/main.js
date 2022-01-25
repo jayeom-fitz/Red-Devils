@@ -1,13 +1,13 @@
 // assets
-import { IconPalette, IconListNumbers, IconFlame, IconLayoutGrid, IconPlayerPlay } from '@tabler/icons';
+import { IconListNumbers, IconFlame, IconLayoutGrid, IconPlayerPlay, IconUsers } from '@tabler/icons';
 
 // constant
 const icons = {
-  IconPalette,
   IconListNumbers,
   IconFlame,
   IconLayoutGrid,
   IconPlayerPlay,
+  IconUsers,
 };
 
 // ==============================|| MAIN MENU ITEMS ||============================== //
@@ -47,6 +47,14 @@ const main = {
       type: 'item',
       url: '/videos',
       icon: icons.IconPlayerPlay,
+      breadcrumbs: false,
+    },
+    {
+      id: 'main-menu-character',
+      title: 'Characters',
+      type: 'item',
+      url: '/characters',
+      icon: icons.IconUsers,
       breadcrumbs: false,
     },
   ],

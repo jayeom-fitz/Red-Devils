@@ -6,6 +6,7 @@ import Loadable from 'components/loadable';
 
 // main menu routing
 const Contents = Loadable(lazy(() => import('views/pages/main/Contents')));
+const Characters = Loadable(lazy(() => import('views/pages/main/Characters')));
 
 // utilities routing
 const Color = Loadable(lazy(() => import('views/pages/main/utilities/Color')));
@@ -31,6 +32,10 @@ const MainRoutes = {
     {
       path: '/videos',
       element: <Contents />,
+    },
+    {
+      path: '/characters',
+      element: <Characters />,
     },
     {
       path: '/color',
