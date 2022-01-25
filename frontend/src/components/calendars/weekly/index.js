@@ -1,27 +1,13 @@
-import { useState } from 'react';
-
 // material-ui
-import { IconButton, Button, Box, Card, Grid, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 // project import
 import Head from './Head';
 import Body from './Body';
 
-// third party
-import moment from 'moment';
-
-// assets
-import { IconChevronLeft, IconChevronsLeft, IconChevronRight, IconChevronsRight } from '@tabler/icons';
-
 // ===============================|| WEEKLY CALENDAR ||=============================== //
 
-const WeeklyCalendar = ({ setDate }) => {
-  const [getMoment, setMoment] = useState(moment());
-  const today = getMoment.clone();
-
-  console.log('get', getMoment);
-  console.log('today', today);
-
+const WeeklyCalendar = ({ date, setDate, getMoment, setMoment }) => {
   return (
     <>
       <Box
@@ -31,7 +17,7 @@ const WeeklyCalendar = ({ setDate }) => {
         }}
       >
         <Head getMoment={getMoment} setMoment={setMoment} />
-        <Body setDate={setDate} getMoment={getMoment} />
+        <Body date={date} setDate={setDate} getMoment={getMoment} />
       </Box>
     </>
   );
