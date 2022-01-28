@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, TextField, Button, Stack } from '@mui/material';
 
+// third party
+import axios from 'axios';
+
 // project imports
 import MainCard from 'components/cards/MainCard';
 
@@ -18,7 +21,25 @@ const AddCharacter = ({ onClose }) => {
   const [name, setName] = useState('');
   const [imageURL, setImageURL] = useState('');
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    const nameTrim = name.trim();
+    const urlTrim = imageURL.trim();
+    const regexName = /^[가-힣|a-z|A-Z|0-9|]+$/;
+
+    if (!(regexName.test(nameTrim) && nameTrim.length > 0 && nameTrim.length <= 20)) return;
+
+    axios
+      .put('/character', {
+        char_name: nameTrim,
+        char_image_url: urlTrim,
+      })
+      .then((res) => {
+        if (res) {
+          alert('Success in adding data');
+          onClose();
+        }
+      });
+  };
 
   return (
     <>
@@ -26,7 +47,7 @@ const AddCharacter = ({ onClose }) => {
         <Box sx={{ p: 4 }}>
           <Stack direction="row" spacing={2}>
             <Box sx={{ width: 240 }}>
-              <Avatar src={imageURL} size="badge" color="primary" outline sx={{ width: 120, height: 120, margin: 'auto' }} />
+              <Avatar src={imageURL} size="badge" color="primary" outline={true} sx={{ width: 120, height: 120, margin: 'auto' }} />
             </Box>
 
             <Stack spacing={2} sx={{ width: 360 }}>
