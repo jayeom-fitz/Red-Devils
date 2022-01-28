@@ -4,13 +4,34 @@ const { sql, pool } = require("./");
 const DB_NAME = "[character]";
 
 // ==========================|| SELECT ||========================== //
-async function getCharacters() {
+async function getCharacters(content, page, count) {
+  try {
+    const p = await pool;
+    const start = (page - 1) * count;
+
+    const result = await p.request().query(`
+      SELECT [char_srl], [char_name], [char_image_url]
+      FROM ${DB_NAME}
+      WHERE [char_name] LIKE '%${content}%'
+      ORDER BY [char_srl] DESC
+      OFFSET ${start} ROWS
+      FETCH NEXT ${count} ROWS ONLY
+    `);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getCount(content) {
   try {
     const p = await pool;
 
     const result = await p.request().query(`
-      SELECT ([char_srl], [char_name], [char_image_url])
+      SELECT COUNT(*) AS count
       FROM ${DB_NAME}
+      WHERE [char_name] LIKE '%${content}%'
     `);
 
     return result;
@@ -36,6 +57,7 @@ async function insertCharacter(name, image) {
 
 module.exports = {
   getCharacters: getCharacters,
+  getCount: getCount,
 
   insertCharacter: insertCharacter,
 };
