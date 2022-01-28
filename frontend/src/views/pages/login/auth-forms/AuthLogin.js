@@ -1,13 +1,8 @@
 // material-ui
 import { Box, Grid } from '@mui/material';
 
-// third party
-
 // project imports
 import GoogleLoginForm from './GoogleLoginForm';
-// import GithubLoginForm from './GithubLoginForm';
-
-// assets
 
 // ============================|| LOGIN ||============================ //
 
@@ -20,11 +15,6 @@ const AuthLogin = () => {
             <GoogleLoginForm />
           </Box>
         </Grid>
-        {/* <Grid item xs={12}>
-          <Box sx={{ alignItems: 'center', display: 'flex' }}>
-            <GithubLoginForm />
-          </Box>
-        </Grid> */}
       </Grid>
     </>
   );

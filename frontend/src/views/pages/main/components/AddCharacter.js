@@ -29,7 +29,7 @@ const AddCharacter = ({ onClose }) => {
     if (!(regexName.test(nameTrim) && nameTrim.length > 0 && nameTrim.length <= 20)) return;
 
     axios
-      .put('/character', {
+      .put(`${process.env.REACT_APP_SERVER_URL}/character`, {
         char_name: nameTrim,
         char_image_url: urlTrim,
       })
