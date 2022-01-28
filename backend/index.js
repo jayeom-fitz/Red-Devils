@@ -9,8 +9,10 @@ server.use(cors());
 
 // ============================|| ROUTES ||============================ //
 const userRouter = require("./routes/user.route.js");
+const characterRouter = require("./routes/character.route.js");
 
 server.use("/user", userRouter);
+server.use("/character", characterRouter);
 
 server.listen(5000, () => {
   console.log("Server running on port 5000");
