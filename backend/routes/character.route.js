@@ -32,7 +32,7 @@ router.get("/list", async (req, res) => {
   const result = await getCount(name);
   const countChar = result.recordset[0].count;
 
-  getCharacters(name, p, c)
+  getCharacters(name ? name : "", p, c)
     .then((result) => {
       res.send({
         characters: result.recordset,
