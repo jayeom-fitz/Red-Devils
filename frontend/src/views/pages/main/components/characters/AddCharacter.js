@@ -47,7 +47,7 @@ const AddCharacter = ({ onClose }) => {
         <Box sx={{ p: 4 }}>
           <Stack direction="row" spacing={2}>
             <Box sx={{ width: 240 }}>
-              <Avatar src={imageURL} size="badge" color="primary" outline={true} sx={{ width: 120, height: 120, margin: 'auto' }} />
+              <Avatar src={imageURL} size="badge" color="primary" outline="true" sx={{ width: 120, height: 120, margin: 'auto' }} />
             </Box>
 
             <Stack spacing={2} sx={{ width: 360 }}>

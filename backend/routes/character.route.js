@@ -29,7 +29,7 @@ router.get("/list", async (req, res) => {
   const p = parseInt(page);
   const c = parseInt(count);
 
-  const result = await getCount(name);
+  const result = await getCount(name ? name : "");
   const countChar = result.recordset[0].count;
 
   getCharacters(name ? name : "", p, c)

@@ -27,9 +27,11 @@ const Characters = () => {
 
   const user_level = sessionStorage.getItem('user_level');
 
+  const count = 1;
+
   useEffect(() => {
     function getCharacters() {
-      let url = process.env.REACT_APP_SERVER_URL + '/character/list?count=30';
+      let url = process.env.REACT_APP_SERVER_URL + '/character/list?count=' + count;
 
       if (page) url += '&page=' + page;
       if (searchContent) url += '&name=' + searchContent;
@@ -69,7 +71,7 @@ const Characters = () => {
       </Box>
 
       {open && <AddCharacter onClose={() => setOpen(false)} />}
-      <CharacterCards page={page} setPage={setPage} characters={characters} count={contentCount} />
+      <CharacterCards page={page} setPage={setPage} characters={characters} contentCount={contentCount} count={count} />
     </>
   );
 };
