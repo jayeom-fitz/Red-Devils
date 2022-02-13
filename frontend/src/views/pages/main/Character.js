@@ -8,15 +8,15 @@ import axios from 'axios';
 
 // project imports
 import Search from 'components/searches/basic';
-import AddCharacter from './components/characters/AddCharacter';
-import CharacterCards from './components/characters/CharacterCards';
+import AddCharacter from './components/character/AddCharacter';
+import CharacterCards from './components/character/CharacterCards';
 
 // assets
 import { IconSquarePlus } from '@tabler/icons';
 
-// ===============================|| CHARACTERS ||=============================== //
+// ===============================|| CHARACTER ||=============================== //
 
-const Characters = () => {
+const Character = () => {
   const [searchContent, setSearchContent] = useState('');
 
   const [open, setOpen] = useState(false);
@@ -25,9 +25,8 @@ const Characters = () => {
   const [contentCount, setContentCount] = useState(1);
   const [characters, setCharacters] = useState([]);
 
+  const count = 20;
   const user_level = sessionStorage.getItem('user_level');
-
-  const count = 1;
 
   useEffect(() => {
     function getCharacters() {
@@ -76,4 +75,4 @@ const Characters = () => {
   );
 };
 
-export default Characters;
+export default Character;

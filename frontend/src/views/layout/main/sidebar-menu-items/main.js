@@ -1,13 +1,14 @@
 // assets
-import { IconListNumbers, IconFlame, IconLayoutGrid, IconPlayerPlay, IconUsers } from '@tabler/icons';
+import { IconBallFootball, IconNews, IconPhoto, IconMessageCircle, IconFlame, IconLayoutGrid, IconPlayerPlay, IconUsers } from '@tabler/icons';
 
 // constant
 const icons = {
-  IconListNumbers,
-  IconFlame,
   IconLayoutGrid,
+  IconNews,
   IconPlayerPlay,
-  IconUsers,
+  IconPhoto,
+  IconMessageCircle,
+  IconBallFootball,
 };
 
 // ==============================|| MAIN MENU ITEMS ||============================== //
@@ -18,44 +19,20 @@ const main = {
   type: 'group',
   children: [
     {
-      id: 'main-menu-rank',
-      title: 'Rank',
+      id: 'main-menu-content',
+      title: 'Content',
       type: 'item',
-      url: '/rank',
-      icon: icons.IconListNumbers,
-      breadcrumbs: false,
-    },
-    {
-      id: 'main-menu-hot',
-      title: 'Hot',
-      type: 'item',
-      url: '/hot',
-      icon: icons.IconFlame,
-      breadcrumbs: false,
-    },
-    {
-      id: 'main-menu-contents',
-      title: 'Contents',
-      type: 'item',
-      url: '/contents',
+      url: '/content',
       icon: icons.IconLayoutGrid,
       breadcrumbs: false,
     },
+
     {
-      id: 'main-menu-videos',
-      title: 'Videos',
-      type: 'item',
-      url: '/videos',
-      icon: icons.IconPlayerPlay,
-      breadcrumbs: false,
-    },
-    {
-      id: 'main-menu-character',
-      title: 'Characters',
-      type: 'item',
-      url: '/characters',
-      icon: icons.IconUsers,
-      breadcrumbs: false,
+      id: 'main-menu-club',
+      title: 'Club',
+      type: 'collapse',
+      icon: icons.IconBallFootball,
+      children: [],
     },
   ],
 };
