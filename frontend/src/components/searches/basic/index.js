@@ -28,8 +28,14 @@ const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme 
 
 // ===============================|| SEARCH BASIC ||=============================== //
 
-const Search = ({ value, setValue }) => {
+const Search = ({ value, setValue, onEnterKeyPress }) => {
   const theme = useTheme();
+
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      onEnterKeyPress();
+    }
+  };
 
   return (
     <>
@@ -38,6 +44,7 @@ const Search = ({ value, setValue }) => {
           id="input-search-basic"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          onKeyPress={onKeyPress}
           placeholder="Search"
           startAdornment={
             <InputAdornment position="start">

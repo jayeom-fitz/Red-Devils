@@ -15,14 +15,14 @@ import { IconPlus, IconX } from '@tabler/icons';
 
 // ===============================|| ADD CONTENT ||=============================== //
 
-const AddContent = ({ label, multiline }) => {
+const AddContent = ({ user_srl, classId, categoryId, label, multiline }) => {
   const theme = useTheme();
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
   const MAX_TITLE = 30;
-  const MAX_CONTENT = 30;
+  const MAX_CONTENT = 300;
 
   const onSubmit = () => {
     const titleTrim = title.trim();
@@ -33,11 +33,21 @@ const AddContent = ({ label, multiline }) => {
       return;
     }
 
-    // axios.put(`${process.env.REACT_APP_SERVER_URL}/content`, {
-    //   cont_category: category,
-    //   cont_title: titleTrim,
-    //   cont_content: contentTrim,
-    // });
+    axios
+      .put(`${process.env.REACT_APP_SERVER_URL}/content`, {
+        user_srl: user_srl,
+        class_id: classId,
+        category_id: categoryId,
+        cont_title: titleTrim,
+        cont_content: contentTrim,
+      })
+      .then((res) => {
+        if (res.data) {
+          alert('The created data is registered');
+          onClear();
+        }
+      })
+      .catch((error) => alert(error));
   };
 
   const onClear = () => {
