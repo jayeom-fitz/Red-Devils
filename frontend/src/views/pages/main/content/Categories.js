@@ -34,7 +34,7 @@ const Categories = ({ categoryId, setCategoryId }) => {
             size="small"
             variant="contained"
             sx={{ m: 1 }}
-            color={categoryId === c.cate_id ? 'error' : 'success'}
+            color={categoryId === c.cate_id ? 'error' : 'warning'}
             onClick={() => setCategoryId(c.cate_id)}
           >
             {c.cate_name}

@@ -11,14 +11,14 @@ import axios from 'axios';
 import MainCard from 'components/cards/MainCard';
 import Search from 'components/searches/basic';
 
-import News from './News';
+import List from 'components/content/list';
 
 // assets
 import { IconCirclePlus } from '@tabler/icons';
 
 // ===============================|| CONTENT LIST ||=============================== //
 
-const ContentList = ({ classId, categoryId }) => {
+const ContentList = ({ categoryId }) => {
   const theme = useTheme();
 
   const [value, setValue] = useState('');
@@ -26,10 +26,10 @@ const ContentList = ({ classId, categoryId }) => {
   const [contentList, setContentList] = useState([]);
   const [isMax, setIsMax] = useState(false);
 
-  const count = 1;
+  const count = 20;
 
-  function getUrl(start, class_id, category_id, search) {
-    let url = process.env.REACT_APP_SERVER_URL + '/content?active=1&start=' + start + '&count=' + count + '&classId=' + class_id;
+  function getUrl(start, category_id, search) {
+    let url = process.env.REACT_APP_SERVER_URL + '/content?active=1&start=' + start + '&count=' + count;
 
     if (category_id) url += '&categoryId=' + category_id;
     if (search) url += '&search=' + search;
@@ -39,7 +39,7 @@ const ContentList = ({ classId, categoryId }) => {
 
   useEffect(() => {
     function getContentList() {
-      const url = getUrl(0, classId, categoryId, searchContent);
+      const url = getUrl(0, categoryId, searchContent);
 
       axios.get(url).then((res) => {
         setContentList(res.data.contentList);
@@ -48,10 +48,10 @@ const ContentList = ({ classId, categoryId }) => {
 
     getContentList();
     setIsMax(false);
-  }, [categoryId, classId, searchContent]);
+  }, [categoryId, searchContent]);
 
   const getMoreContent = () => {
-    let url = getUrl(contentList[contentList.length - 1].cont_srl, classId, categoryId, searchContent);
+    let url = getUrl(contentList[contentList.length - 1].cont_srl, categoryId, searchContent);
 
     axios.get(url).then((res) => {
       if (res.data.contentList.length < count) {
@@ -63,23 +63,21 @@ const ContentList = ({ classId, categoryId }) => {
   };
 
   return (
-    <>
-      <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]} sx={{ m: 1 }}>
-        <Box sx={{ m: 1 }}>
-          <Search value={value} setValue={setValue} onEnterKeyPress={() => setSearchContent(value)} />
+    <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]} sx={{ m: 1 }}>
+      <Box sx={{ m: 1 }}>
+        <Search value={value} setValue={setValue} onEnterKeyPress={() => setSearchContent(value)} />
+      </Box>
+
+      <List contentList={contentList} />
+
+      {contentList && !isMax && (
+        <Box sx={{ p: 4 }}>
+          <Button variant="contained" color="secondary" fullWidth onClick={getMoreContent}>
+            <IconCirclePlus />
+          </Button>
         </Box>
-
-        <Box sx={{ p: 2 }}>{classId && classId === 'N' ? <News contentList={contentList} /> : null}</Box>
-
-        {contentList && !isMax && (
-          <Box sx={{ p: 4 }}>
-            <Button variant="contained" color="secondary" fullWidth onClick={getMoreContent}>
-              <IconCirclePlus />
-            </Button>
-          </Box>
-        )}
-      </MainCard>
-    </>
+      )}
+    </MainCard>
   );
 };
 

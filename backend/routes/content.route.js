@@ -1,19 +1,21 @@
 const router = require("express").Router();
 
 // project import
-const { getContent, insertContent } = require("../database/content/db");
-const { getClasses } = require("../database/content/class.db");
+const {
+  getContent,
+  insertContent,
+  deleteContent,
+} = require("../database/content/db");
 const { getCategories } = require("../database/content/category.db");
 
 // ==========================|| CONTENT ROUTE ||========================== //
 
 // ===============|| basic ||============== //
 router.get("/", (req, res) => {
-  const { active, classId, categoryId, start, count, search } = req.query;
+  const { active, categoryId, start, count, search } = req.query;
 
   getContent(
     parseInt(active),
-    classId,
     categoryId,
     parseInt(start),
     parseInt(count),
@@ -24,10 +26,16 @@ router.get("/", (req, res) => {
 });
 
 router.put("/", (req, res) => {
-  const { user_srl, cont_title, cont_content, class_id, category_id } =
+  const { user_srl, cont_title, cont_content, cont_link, category_id } =
     req.body;
 
-  insertContent(user_srl, cont_title, cont_content, class_id, category_id)
+  insertContent(
+    user_srl,
+    cont_title,
+    cont_content,
+    cont_link ? 1 : 0,
+    category_id
+  )
     .then(() => {
       res.send(true);
     })
@@ -36,15 +44,16 @@ router.put("/", (req, res) => {
     });
 });
 
-// ===============|| class ||============== //
-router.get("/class", (req, res) => {
-  const { active } = req.query;
+router.delete("/", (req, res) => {
+  const { cont_srl } = req.body;
 
-  getClasses(active ? parseInt(active) : -1).then((result) => {
-    res.send({
-      classes: result.recordset,
+  deleteContent(cont_srl)
+    .then(() => {
+      res.send(true);
+    })
+    .catch(() => {
+      res.send(false);
     });
-  });
 });
 
 // ===============|| category ||============== //
